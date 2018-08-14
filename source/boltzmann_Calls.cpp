@@ -912,7 +912,7 @@ int boltzmann(Cosmology *cosmo, double *zlist_transfer){
 
 
 	//now we make sure that we have z_collapse exactly to avoid interpolation in z.
-		cosmo->j_collapse_array[0]=find_value_reverse(Nz_transfer, zlist_transfer_code, cosmo->z_collapse_array[0]);
+		cosmo->j_collapse_array[0]=find_value_reverse(Nz_transfer, zlist_transfer_code, cosmo->z_collapse_array[0])+1;
 	//we do not want to remove z=0, so we check we are not:
 		if(cosmo->j_collapse_array[0] == Nz_transfer-1){
 			cosmo->j_collapse_array[0]--;
@@ -921,7 +921,7 @@ int boltzmann(Cosmology *cosmo, double *zlist_transfer){
 		zlist_transfer_code[cosmo->j_collapse_array[0]]=cosmo->z_collapse_array[0];
   //and now we check that the z are not "colliding", and have different values.
 		for(jz=1;jz<cosmo->N_zcoll;jz++){
-			cosmo->j_collapse_array[jz]=find_value_reverse(Nz_transfer, zlist_transfer_code, cosmo->z_collapse_array[jz]);//	printf("j=%ld, zlist=%.3le, and z_coll=%.3le \n",j_collapse, zlist_transfer_code[j_collapse],z_collapse);
+			cosmo->j_collapse_array[jz]=find_value_reverse(Nz_transfer, zlist_transfer_code, cosmo->z_collapse_array[jz])+1;//	printf("j=%ld, zlist=%.3le, and z_coll=%.3le \n",j_collapse, zlist_transfer_code[j_collapse],z_collapse);
 			if(cosmo->j_collapse_array[jz]==cosmo->j_collapse_array[jz-1]){
 				cosmo->j_collapse_array[jz]--;
 			}//		printf("z_coll=%f, z_code=%f, j_coll=%d \n\n\n",z_collapse_array[jz],zlist_transfer_code[j_collapse_array[jz]],j_collapse_array[jz]);
